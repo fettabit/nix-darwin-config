@@ -12,10 +12,16 @@
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
-  let
-    configuration = { pkgs, config, ... }: {
-
+  outputs = inputs @ {
+    self,
+    nix-darwin,
+    nixpkgs,
+  }: let
+    configuration = {
+      pkgs,
+      config,
+      ...
+    }: {
       #############################################################
       # CORE (leave these on)
       #############################################################
@@ -41,7 +47,6 @@
       # that write user prefs, homebrew, etc.). Set to your login name.
       system.primaryUser = "jftx";
 
-
       #############################################################
       # PACKAGES  (system-wide, from nixpkgs)
       # Search names: https://search.nixos.org/packages
@@ -51,11 +56,12 @@
         git
         curl
         wget
-        eza           
+        eza
         bat
         btop
         gh
         neovim
+        alejandra
         fastfetch
       ];
 
@@ -65,11 +71,12 @@
       # };
 
       # Extra shell aliases (applies to interactive shells nix-darwin manages).
-        environment.shellAliases = {
-          ll = "eza -la";
-          gs = "git status";
-        };
-
+      environment.shellAliases = {
+        ll = "eza -la";
+        gs = "git status";
+        rb = "sudo darwin-rebuild switch --flake ~/nix-darwin-config";
+        ndcfg = "cd ~/nix-darwin-config && code .";
+      };
 
       #############################################################
       # SHELLS
@@ -79,15 +86,13 @@
       # programs.bash.enable = true;
       # programs.fish.enable = true;
 
-
       #############################################################
       # FONTS
       #############################################################
-        fonts.packages = with pkgs; [
-          nerd-fonts.jetbrains-mono
-      #   nerd-fonts.fira-code
-        ];
-
+      fonts.packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+        #   nerd-fonts.fira-code
+      ];
 
       #############################################################
       # SECURITY / Touch ID for sudo
@@ -95,36 +100,33 @@
       #############################################################
       # security.pam.services.sudo_local.touchIdAuth = true;
 
-
       #############################################################
       # HOMEBREW  (for GUI apps / casks nix can't provide, and Mac App Store)
       # nix-darwin manages the Brewfile; brew itself must be installed already.
       # Requires system.primaryUser to be set (above).
       #############################################################
-        homebrew = {
-          enable = true;
-          onActivation = {
-            autoUpdate = false;   # only update when you run `brew update`
-            upgrade = false;
-            cleanup = "none";      # remove anything not listed here
-          };
-          casks = [
-              "zen"
-              "raycast"
-              "vesktop"
-	      "visual-studio-code"
-          ];
+      homebrew = {
+        enable = true;
+        onActivation = {
+          autoUpdate = false; # only update when you run `brew update`
+          upgrade = false;
+          cleanup = "none"; # remove anything not listed here
         };
-
+        casks = [
+          "zen"
+          "raycast"
+          "vesktop"
+          "visual-studio-code"
+        ];
+      };
 
       #############################################################
       # NETWORKING
       #############################################################
-        networking.hostName = "helios";
-        networking.computerName = "helios";
-      # networking.knownNetworkServices = [ "Wi-Fi" ];
+      networking.hostName = "helios";
+      networking.computerName = "helios";
+      networking.knownNetworkServices = ["Wi-Fi"];
       # networking.dns = [ "1.1.1.1" "9.9.9.9" ];
-
 
       #############################################################
       # macOS SYSTEM DEFAULTS
@@ -214,7 +216,6 @@
       #   };
       # };
 
-
       #############################################################
       # KEYBOARD remapping (system level)
       #############################################################
@@ -223,21 +224,18 @@
       #   remapCapsLockToEscape = true;
       # };
 
-
       #############################################################
       # POWER
       #############################################################
       # power.sleep.computer = "never";   # be careful on a laptop
       # power.sleep.display = 15;
 
-
       #############################################################
       # LINUX BUILDER (run a NixOS VM to build Linux binaries locally)
       #############################################################
       # nix.linux-builder.enable = true;
     };
-  in
-  {
+  in {
     darwinConfigurations."helios" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
