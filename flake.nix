@@ -26,9 +26,10 @@
       # CORE (leave these on)
       #############################################################
 
-      # You used the Determinate installer, which manages Nix itself.
-      # Leaving this false prevents nix-darwin from fighting it.
+      #  used the determinate installer, which manages nix itself.
+      # leaving this false prevents nix-darwin from fighting it.
       nix.enable = false;
+      nixpkgs.config.allowUnfree = true;
 
       # Required by Nix when using flakes. (Harmless with nix.enable=false;
       # remove if Determinate complains about duplicate settings.)
@@ -42,9 +43,6 @@
 
       # Apple Silicon.
       nixpkgs.hostPlatform = "aarch64-darwin";
-
-      # REQUIRED once you use any user-scoped option below (system.defaults
-      # that write user prefs, homebrew, etc.). Set to your login name.
       system.primaryUser = "jftx";
 
       #############################################################
@@ -63,6 +61,7 @@
         neovim
         alejandra
         fastfetch
+        claude-code
       ];
 
       # Extra $PATH-visible env vars.
