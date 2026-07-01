@@ -6,16 +6,15 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # ── OPTIONAL: home-manager (per-user dotfiles, declarative ~/.ssh, shell, etc.)
-    # Uncomment this input AND the module wiring near the bottom to enable it.
-    # home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
     nix-darwin,
     nixpkgs,
+    ...
   }: let
     configuration = {
       pkgs,
@@ -45,6 +44,11 @@
       # Apple Silicon.
       nixpkgs.hostPlatform = "aarch64-darwin";
       system.primaryUser = "jftx";
+
+      users.users.jftx = {
+        name = "jftx";
+        home = "/Users/jftx";
+      };
 
       #############################################################
       # PACKAGES  (system-wide, from nixpkgs)
@@ -242,16 +246,12 @@
       modules = [
         configuration
 
-        # ── OPTIONAL: home-manager wiring ─────────────────────
-        # Uncomment the input at the top first, then this block, then
-        # create ./home.nix. Change "jftx" to your username.
-        #
-        # inputs.home-manager.darwinModules.home-manager
-        # {
-        #   home-manager.useGlobalPkgs = true;
-        #   home-manager.useUserPackages = true;
-        #   home-manager.users.jftx = import ./home.nix;
-        # }
+        inputs.home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.jftx = import ./home.nix;
+        }
       ];
     };
   };
