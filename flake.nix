@@ -156,16 +156,16 @@
       };
 
       # ── Finder ────────────────────────────────────────────
-      # system.defaults.finder = {
-      #   AppleShowAllExtensions = true;
-      #   AppleShowAllFiles = true;       # show hidden files
-      #   FXPreferredViewStyle = "Nlsv";  # "clmv" columns | "Nlsv" list | "icnv" icon | "glyv" gallery
-      #   ShowPathbar = true;
-      #   ShowStatusBar = true;
-      #   _FXShowPosixPathInTitle = true;
-      #   FXEnableExtensionChangeWarning = false;
-      #   QuitMenuItem = true;
-      # };
+      system.defaults.finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+        FXPreferredViewStyle = "clmv";
+        ShowPathbar = true;
+        ShowStatusBar = true;
+        _FXShowPosixPathInTitle = true;
+        FXEnableExtensionChangeWarning = false;
+        QuitMenuItem = true;
+      };
 
       # ── Global (NSGlobalDomain): keyboard, UI, text ───────
       # system.defaults.NSGlobalDomain = {
@@ -184,11 +184,11 @@
       # };
 
       # ── Trackpad ──────────────────────────────────────────
-      # system.defaults.trackpad = {
-      #   Clicking = true;                 # tap to click
-      #   TrackpadThreeFingerDrag = true;
-      #   TrackpadRightClick = true;
-      # };
+      system.defaults.trackpad = {
+        Clicking = true; # tap to click
+        #   TrackpadThreeFingerDrag = true;
+        #   TrackpadRightClick = true;
+      };
 
       # ── Screenshots ───────────────────────────────────────
       # system.defaults.screencapture = {
@@ -198,17 +198,17 @@
       # };
 
       # ── Login window ──────────────────────────────────────
-      # system.defaults.loginwindow = {
-      #   GuestEnabled = false;
-      #   LoginwindowText = "helios";
-      #   SHOWFULLNAME = false;
-      # };
+      system.defaults.loginwindow = {
+        #   GuestEnabled = false;
+        LoginwindowText = "helios";
+        #   SHOWFULLNAME = false;
+      };
 
       # ── Software Update ───────────────────────────────────
       # system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
 
       # ── Menu bar clock ────────────────────────────────────
-      # system.defaults.menuExtraClock.Show24Hour = true;
+      system.defaults.menuExtraClock.Show24Hour = true;
 
       # ── Spaces ────────────────────────────────────────────
       # system.defaults.spaces.spans-displays = false;
