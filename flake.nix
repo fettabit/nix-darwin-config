@@ -73,8 +73,10 @@
       environment.shellAliases = {
         ll = "eza -la";
         gs = "git status";
-        rb = "sudo darwin-rebuild switch --flake ~/nix-darwin-config";
+        gp = "git push -u origin main";
         ndcfg = "cd ~/nix-darwin-config && code .";
+        rb = "sudo darwin-rebuild switch --flake ~/nix-darwin-config";
+        trb = "sudo darwin-rebuild build --flake ~/nix-darwin-config";
       };
 
       #############################################################
