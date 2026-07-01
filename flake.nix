@@ -30,6 +30,7 @@
       # leaving this false prevents nix-darwin from fighting it.
       nix.enable = false;
       nixpkgs.config.allowUnfree = true;
+      nixpkgs.config.allowUnsupported = true;
 
       # Required by Nix when using flakes. (Harmless with nix.enable=false;
       # remove if Determinate complains about duplicate settings.)
