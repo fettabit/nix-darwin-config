@@ -142,18 +142,18 @@
       #############################################################
 
       # ── Dock ──────────────────────────────────────────────
-      # system.defaults.dock = {
-      #   autohide = true;
-      #   autohide-delay = 0.0;
-      #   autohide-time-modifier = 0.2;
-      #   orientation = "bottom";     # "left" | "bottom" | "right"
-      #   tilesize = 48;
-      #   magnification = false;
-      #   mru-spaces = false;         # don't auto-rearrange Spaces
-      #   show-recents = false;
-      #   static-only = false;        # true = only show open apps
-      #   # persistent-apps = [ ];    # pin specific apps
-      # };
+      system.defaults.dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+        autohide-time-modifier = 0.5;
+        orientation = "right";
+        tilesize = 40;
+        magnification = true;
+        mru-spaces = false;
+        show-recents = false;
+        static-only = true;
+        # persistent-apps = [];
+      };
 
       # ── Finder ────────────────────────────────────────────
       # system.defaults.finder = {
